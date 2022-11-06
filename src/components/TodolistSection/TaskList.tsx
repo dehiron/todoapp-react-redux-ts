@@ -2,7 +2,7 @@ import React from 'react';
 import { Task } from '../../Types';
 import TaskItem from './TaskItem';
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { selectTasks } from '../../redux/slices/tasksSlice';
 
 //reduxにより不要になった
 type TaskListProps = {
@@ -15,7 +15,8 @@ const TaskList:React.FC<TaskListProps> = ({
     // setTasks //reduxにより不要になった
 }) => {
     
-    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    // const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const tasks = useSelector(selectTasks);
 
     //reduxにより不要になった
     // const handleDone = (task: Task) => {

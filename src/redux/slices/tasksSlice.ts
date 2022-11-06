@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Task } from "../../Types"
+import { RootState } from "../store";
 
 type State = {
     count: number
@@ -53,5 +54,8 @@ export const tasksSlice = createSlice({
 export const {
     addTask, doneTask, deleteTask
 } = tasksSlice.actions;
+
+//selectors
+export const selectTasks = (state: RootState) => state.tasks.tasks
 
 export default tasksSlice.reducer;
