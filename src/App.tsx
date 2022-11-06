@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import FirstComponent from './components/FirstComponent/FirstComponent';
@@ -27,6 +27,19 @@ const App = () => {
     }
   ]
 
+  const [count, setCount] = useState<number>(0)
+  const handleIncrement = () => {
+    setCount(count + 1)
+  }
+  const handleDecrement = () => {
+    setCount(count - 1)
+  }
+
+  const [messageState, setMessageState] = useState<string>("")
+  const handleMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageState(event.target.value)
+  }
+
   return (
     <div className="App">
       <p>{message}</p>
@@ -46,6 +59,23 @@ const App = () => {
         <p>チルドレン1</p>
         <p>チルドレン2</p>
       </FirstComponent>
+
+      <div>
+        <p>ここからカウントステートの例</p>
+        {count}
+        <div>
+          <button onClick={handleDecrement}>-</button>
+          <button onClick={handleIncrement}>+</button>
+        </div>
+      </div>
+
+      <div>
+        <p>ここからメッセージステートの例</p>
+        {messageState}
+        <div>
+          <input type="text" value={messageState} onChange={handleMessage} />
+        </div>
+      </div>
 
     </div>
   );
