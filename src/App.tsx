@@ -1,24 +1,52 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import FirstComponent from './components/FirstComponent/FirstComponent';
 
-function App() {
+type Item = {
+  id: number,
+  title: string
+}
+
+const App = () => {
+  const message: string = "ハローReact"
+  const items: string[] = [ "item1", "item2", "item3" ]
+  const objItems: Item[] = [
+    {
+      id: 1,
+      title: "object item 1"
+    },
+    {
+      id: 2,
+      title: "object item 2"
+      
+    },
+    {
+      id: 3,
+      title: "object item 3"
+    }
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{message}</p>
+      <ul>
+        {items.map((item, index) => (
+          <p key={index}>{item}</p>    
+        ))}
+      </ul>
+      <ul>
+        {objItems.map((item, index) => (
+          <p key={index}>{item.title}</p>    
+        ))}
+      </ul>
+
+      {/* 子要素はチルドレンとして渡せる */}
+      <FirstComponent message={message} >
+        <p>チルドレン1</p>
+        <p>チルドレン2</p>
+      </FirstComponent>
+
     </div>
   );
 }
