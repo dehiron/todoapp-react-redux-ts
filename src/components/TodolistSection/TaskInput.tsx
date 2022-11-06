@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
+import { Task } from '../../Types';
 
-type TaskInputProps = {};
+type TaskInputProps = {
+    tasks: Task[],
+    setTasks:  React.Dispatch<React.SetStateAction<Task[]>> //元のsetTasksにカーソル合わせると出してくれる
+};
 
-const TaskInput:React.FC<TaskInputProps> = () => {
+const TaskInput:React.FC<TaskInputProps> = ({tasks, setTasks}) => {
     
     const [inputTitle, setInputTitle] = useState("")
+    const [ count, setCount ] = useState(tasks.length + 1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputTitle(event.target.value);
+    }
+
+    const handleAddTodo = () => {
+        setCount(count + 1)
+        const newTask: Task = {
+            id: count,
+            title: inputTitle,
+            done: false
+        }
+        setTasks([newTask, ...tasks])
+        setInputTitle("")
     }
 
     return (
@@ -19,7 +35,12 @@ const TaskInput:React.FC<TaskInputProps> = () => {
                     value={inputTitle}
                     onChange={handleInputChange}
                 />
-                <button className="btn is-primary">追加</button>
+                <button 
+                    onClick={handleAddTodo} 
+                    className="btn is-primary"
+                >
+                    追加
+                </button>
             </div>
         </div>
     )

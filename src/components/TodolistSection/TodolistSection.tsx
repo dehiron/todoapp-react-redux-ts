@@ -27,8 +27,8 @@ const SecondComponent:React.FC<SecondComponentProps> = () => {
     return (
         <>
             <p>Todoリストで遊ぶ</p>
-            <TaskInput />
-            <TaskList tasks={tasks} />
+            <TaskInput tasks={tasks} setTasks={setTasks}/>
+            <TaskList tasks={tasks} setTasks={setTasks} />
         </>
     )
 }
