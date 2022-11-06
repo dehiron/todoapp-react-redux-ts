@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import FirstComponent from './components/FirstComponent/FirstComponent';
+import TodolistSection from './components/TodolistSection/TodolistSection';
 
 type Item = {
   id: number,
@@ -41,40 +42,54 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <p>{message}</p>
-      <ul>
-        {items.map((item, index) => (
-          <p key={index}>{item}</p>    
-        ))}
-      </ul>
-      <ul>
-        {objItems.map((item, index) => (
-          <p key={index}>{item.title}</p>    
-        ))}
-      </ul>
+    <div className="App" style={{width:"100vw"}}>
+      <p style={{fontSize:"24px", fontWeight:"600", borderBottom:"2px solid rgb(211,211,211)", padding:"10px" }}>
+        Ract × Redux × TypeScript PlayGround
+      </p>
 
-      {/* 子要素はチルドレンとして渡せる */}
-      <FirstComponent message={message} >
-        <p>チルドレン1</p>
-        <p>チルドレン2</p>
-      </FirstComponent>
+      <div style={{display:"flex"}}>
 
-      <div>
-        <p>ここからカウントステートの例</p>
-        {count}
-        <div>
-          <button onClick={handleDecrement}>-</button>
-          <button onClick={handleIncrement}>+</button>
+        <div style={{width:"50%"}}>
+          <p>{message}</p>
+          <div>
+            {items.map((item, index) => (
+              <p key={index}>{item}</p>    
+            ))}
+          </div>
+          <div>
+            {objItems.map((item, index) => (
+              <p key={index}>{item.title}</p>    
+            ))}
+          </div>
+
+          {/* 子要素はチルドレンとして渡せる */}
+          <FirstComponent message={message} >
+            <p>チルドレン1</p>
+            <p>チルドレン2</p>
+          </FirstComponent>
+
+          <div>
+            <p>ここからカウントステートの例</p>
+            {count}
+            <div>
+              <button onClick={handleDecrement}>-</button>
+              <button onClick={handleIncrement}>+</button>
+            </div>
+          </div>
+
+          <div>
+            <p>ここからメッセージステートの例</p>
+            {messageState}
+            <div>
+              <input type="text" value={messageState} onChange={handleMessage} />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <p>ここからメッセージステートの例</p>
-        {messageState}
-        <div>
-          <input type="text" value={messageState} onChange={handleMessage} />
+        <div style={{width:"50%"}}>
+          <TodolistSection />
         </div>
+      
       </div>
 
     </div>
